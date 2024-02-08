@@ -1,0 +1,184 @@
+<app-side-nav (isShowNav)="handleSideBar($event)"></app-side-nav>
+<div class="container-fluid " [ngStyle]="{'padding-left' : isShowPadding ? '280px' : '100px'}">
+    <div class="row">
+        <div class="col-12">
+            <h2><mat-icon class="back" routerLink="/master/agent-list">arrow_back</mat-icon>Agent
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 ">
+            <form [formGroup]="agentFormData" (ngSubmit)="submitData()">
+                <div class="row border">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2">
+                        <label for="" class="">Agent Id <sup>*</sup></label>
+                        <input type="text" class="form-control " placeholder="Enter Agent Id" formControlName="agentId">
+                        <div
+                            *ngIf="agentFormData.controls['agentId'].touched && agentFormData.controls['agentId'].dirty && agentFormData.controls['agentId'].hasError('required') && !isSubmitted">
+                            <p class="error-message">Agent Id is mandatory</p>
+                        </div>
+                        <div *ngIf="isSubmitted && agentFormData.controls['agentId'].hasError('required')">
+                            <p class="error-message">Agent Id is mandatory</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                        <div class="row">
+                            <div class="col-12 py-2">
+                                <section class="file-border">
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-center py-1"
+                                            style="position: relative;">
+                                            <img class="img-ava"
+                                                [src]="imageSrc?imageSrc:'/assets/logs/profile.png'"><sup
+                                                class="delete_img" *ngIf="imageSrc"><mat-icon
+                                                    style="font-size: 20px;display: flex;align-items: center;justify-content: center;">delete</mat-icon></sup>
+
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-center py-1">
+                                            <span class="upload_text">
+                                                Choose Agent Photo</span>
+                                            <input type="file" #inputFile class="d-none">
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2">
+                        <label for="" class="">Agent Name <sup>*</sup></label>
+                        <input type="text" class="form-control " placeholder="Enter Agent Name"
+                            formControlName="agentName">
+                        <div
+                            *ngIf="agentFormData.controls['agentName'].touched && agentFormData.controls['agentName'].dirty && agentFormData.controls['agentName'].hasError('required') && !isSubmitted">
+                            <p class="error-message">Agent Name is mandatory</p>
+                        </div>
+                        <div *ngIf="isSubmitted && agentFormData.controls['agentName'].hasError('required')">
+                            <p class="error-message">Agent Name is mandatory</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2">
+                        <label for="example">Category <sup>*</sup></label>
+                        <select class="form-select " aria-label="Default select example" formControlName="category">
+                            <option [selected]="agentFormData.value.category === ''" value="" hidden>
+                                Select
+                                Category</option>
+                            <option value="POS Agent">POS Agent</option>
+                            <div
+                                *ngIf="agentFormData.controls['category'].touched && agentFormData.controls['category'].dirty && agentFormData.controls['category'].hasError('required') && !isSubmitted">
+                                <p class="error-message">Category is mandatory</p>
+                            </div>
+                            <div *ngIf="isSubmitted && agentFormData.controls['category'].hasError('required')">
+                                <p class="error-message">Category is mandatory</p>
+                            </div>
+                        </select>
+
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2">
+                        <label for="" class="">Address</label>
+                        <input type="text" class="form-control " placeholder="Enter Address" formControlName="address">
+
+
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2">
+
+                        <label for="" class="">Country </label>
+                        <select class="form-select " aria-label="Default select example" formControlName="country">
+                            <option [selected]="agentFormData.value.country === ''" value="" hidden>
+                                Select
+                                Country</option>
+                                <option value="India">India</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2">
+                        <label for="">State </label>
+                        <select class="form-select " aria-label="Default select example" formControlName="state">
+                            <option [selected]="agentFormData.value.state === ''" value="" hidden>
+                                Select
+                                State</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Jammu Kashmir">Jammu Kashmir</option>
+                                <option value="Gujrat">Gujrat</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Mumbai">Mumbai</option>
+
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2">
+
+                        <label for="">City </label>
+                        <select class="form-select " aria-label="Default select example" formControlName="city">
+                            <option [selected]="agentFormData.value.city === ''" value="" hidden>
+                                Select
+                                City</option>
+                                <option value="Lucknow">Lucknow</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2">
+
+                        <label for="">Pin Code </label>
+                        <input type="text" class="form-control " placeholder="Enter Pin Code" formControlName="pinCode">
+
+
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2">
+                        <label for="">Mobile <sup>*</sup></label>
+                        <input type="number" min="0" class="form-control " placeholder="Enter Mobile Number"
+                            formControlName="mobile" appDirective>
+                        <div
+                            *ngIf="agentFormData.controls['agentId'].touched && agentFormData.controls['agentId'].dirty && agentFormData.controls['agentId'].hasError('required') && !isSubmitted">
+                            <p class="error-message">Mobile Number is mandatory</p>
+                        </div>
+                        <div *ngIf="isSubmitted && agentFormData.controls['agentId'].hasError('required')">
+                            <p class="error-message">Mobile Number is mandatory</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2">
+                        <label for="">Mail Id <sup>*</sup></label>
+                        <input type="email" class="form-control " placeholder="Enter Mail Id" formControlName="mailId">
+                        <div
+                            *ngIf="agentFormData.controls['mailId'].touched && agentFormData.controls['mailId'].dirty && agentFormData.controls['mailId'].hasError('required') && !isSubmitted">
+                            <p class="error-message">Mail Id is mandatory</p>
+                        </div>
+                        <div *ngIf="isSubmitted && agentFormData.controls['mailId'].hasError('required')">
+                            <p class="error-message">Mail Id is mandatory</p>
+                        </div>
+                        <div *ngIf="agentFormData.get('mailId').hasError('pattern')">
+                            <p class="error-message">Please enter a valid email address.</p>
+                          </div>
+                    </div>
+
+                </div>
+                <div class="row border mt-2">
+                    <h2>KYC</h2>
+
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2 ">
+                        <div class="d-flex d-grid gap-2">
+                            <input type="text" class="form-control w-50" placeholder="Enter Aadhar Card Number"
+                                formControlName="aadharNumber"><span
+                                class="upload_text">{{agentFormData.value.companyRegistrationFilePath ?
+                                agentFormData.value.photo : 'Upload Aadhar'}}
+                                <input type="file" #inputFile class="d-none">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 py-2 ">
+                        <div class="d-flex d-grid gap-2">
+                            <input type="text" class="form-control w-50" placeholder="Enter PAN No"
+                                formControlName="panNumber">
+                            <span class="upload_text">{{agentFormData.value.companyRegistrationFilePath ?
+                                agentFormData.value.photo : 'Upload PAN'}}
+                                <input type="file" #inputFile class="d-none">
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-12 d-flex justify-content-end py-2">
+                    <button type="submit" class="btn btn-primary" style="background-color: #00acff;">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
